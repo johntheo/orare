@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es5",                          
+    "module": "commonjs",                    
+    "lib": ["es6"],                     
+    "allowJs": true,
+    "outDir": "dist",                          
+    "rootDir": "src",
+    "strict": true,         
+    "noImplicitAny": true,
+    "baseUrl": ".",
+    "sourceMap": false, // true only for dev purpose
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "types": ["node","jest"]
+  },
+  "include": ["src/**/*", "tests/**/*"], 
+  "exclude": ["node_modules"]
+}
