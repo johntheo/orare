@@ -90,4 +90,8 @@ export const extendedTheme = {
 		/** 12px size / 16px high / bold */
 		button: ['0.75rem', { lineHeight: '1rem', fontWeight: '700' }],
 	},
+	fontFamily: {
+		inter: ['Inter', 'sans-serif'],
+		croissant: ['Croissant One', 'sans-serif'],
+	}
 } satisfies Config['theme']

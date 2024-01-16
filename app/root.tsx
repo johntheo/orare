@@ -1,4 +1,4 @@
-import { useForm } from '@conform-to/react'
+// import { useForm } from '@conform-to/react'
 import { parse } from '@conform-to/zod'
 import { cssBundleHref } from '@remix-run/css-bundle'
 import {
@@ -18,10 +18,9 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
-	useFetcher,
+	// useFetcher,
 	useFetchers,
 	useLoaderData,
-	useMatches,
 	useSubmit,
 } from '@remix-run/react'
 import { withSentry } from '@sentry/remix'
@@ -30,9 +29,8 @@ import { AuthenticityTokenProvider } from 'remix-utils/csrf/react'
 import { HoneypotProvider } from 'remix-utils/honeypot/react'
 import { z } from 'zod'
 import { GeneralErrorBoundary } from './components/error-boundary.tsx'
-import { ErrorList } from './components/forms.tsx'
+// import { ErrorList } from './components/forms.tsx'
 import { EpicProgress } from './components/progress-bar.tsx'
-import { SearchBar } from './components/search-bar.tsx'
 import { useToast } from './components/toaster.tsx'
 import { Button } from './components/ui/button.tsx'
 import {
@@ -230,9 +228,6 @@ function App() {
 	const nonce = useNonce()
 	const user = useOptionalUser()
 	const theme = useTheme()
-	const matches = useMatches()
-	const isOnSearchPage = matches.find(m => m.id === 'routes/users+/index')
-	const searchBar = isOnSearchPage ? null : <SearchBar status="idle" />
 	useToast(data.toast)
 
 	return (
@@ -241,9 +236,6 @@ function App() {
 				<header className="container py-6">
 					<nav className="flex flex-wrap items-center justify-between gap-4 sm:flex-nowrap md:gap-8">
 						<Logo />
-						<div className="ml-auto hidden max-w-sm flex-1 sm:block">
-							{searchBar}
-						</div>
 						<div className="flex items-center gap-10">
 							{user ? (
 								<UserDropdown />
@@ -253,7 +245,6 @@ function App() {
 								</Button>
 							)}
 						</div>
-						<div className="block w-full sm:hidden">{searchBar}</div>
 					</nav>
 				</header>
 
@@ -261,10 +252,9 @@ function App() {
 					<Outlet />
 				</div>
 
-				<div className="container flex justify-between pb-5">
-					<Logo />
+				{/* <div className="container flex justify-between pb-5">
 					<ThemeSwitch userPreference={data.requestInfo.userPrefs.theme} />
-				</div>
+				</div> */}
 			</div>
 			<EpicToaster closeButton position="top-center" theme={theme} />
 			<EpicProgress />
@@ -275,12 +265,9 @@ function App() {
 function Logo() {
 	return (
 		<Link to="/" className="group grid leading-snug">
-			<span className="font-light transition group-hover:-translate-x-1	">
-				epic
-			</span>
-			<span className="font-bold transition group-hover:translate-x-1	">
-				notes
-			</span>
+			<h1 className="font-croissant font-bold text-3xl transition group-hover:translate-x-1	">
+				orare.
+			</h1>
 		</Link>
 	)
 }
@@ -389,51 +376,51 @@ export function useOptimisticThemeMode() {
 	}
 }
 
-function ThemeSwitch({ userPreference }: { userPreference?: Theme | null }) {
-	const fetcher = useFetcher<typeof action>()
+// function ThemeSwitch({ userPreference }: { userPreference?: Theme | null }) {
+// 	const fetcher = useFetcher<typeof action>()
 
-	const [form] = useForm({
-		id: 'theme-switch',
-		lastSubmission: fetcher.data?.submission,
-	})
+// 	const [form] = useForm({
+// 		id: 'theme-switch',
+// 		lastSubmission: fetcher.data?.submission,
+// 	})
 
-	const optimisticMode = useOptimisticThemeMode()
-	const mode = optimisticMode ?? userPreference ?? 'system'
-	const nextMode =
-		mode === 'system' ? 'light' : mode === 'light' ? 'dark' : 'system'
-	const modeLabel = {
-		light: (
-			<Icon name="sun">
-				<span className="sr-only">Light</span>
-			</Icon>
-		),
-		dark: (
-			<Icon name="moon">
-				<span className="sr-only">Dark</span>
-			</Icon>
-		),
-		system: (
-			<Icon name="laptop">
-				<span className="sr-only">System</span>
-			</Icon>
-		),
-	}
+// 	const optimisticMode = useOptimisticThemeMode()
+// 	const mode = optimisticMode ?? userPreference ?? 'system'
+// 	const nextMode =
+// 		mode === 'system' ? 'light' : mode === 'light' ? 'dark' : 'system'
+// 	const modeLabel = {
+// 		light: (
+// 			<Icon name="sun">
+// 				<span className="sr-only">Light</span>
+// 			</Icon>
+// 		),
+// 		dark: (
+// 			<Icon name="moon">
+// 				<span className="sr-only">Dark</span>
+// 			</Icon>
+// 		),
+// 		system: (
+// 			<Icon name="laptop">
+// 				<span className="sr-only">System</span>
+// 			</Icon>
+// 		),
+// 	}
 
-	return (
-		<fetcher.Form method="POST" {...form.props}>
-			<input type="hidden" name="theme" value={nextMode} />
-			<div className="flex gap-2">
-				<button
-					type="submit"
-					className="flex h-8 w-8 cursor-pointer items-center justify-center"
-				>
-					{modeLabel[mode]}
-				</button>
-			</div>
-			<ErrorList errors={form.errors} id={form.errorId} />
-		</fetcher.Form>
-	)
-}
+// 	return (
+// 		<fetcher.Form method="POST" {...form.props}>
+// 			<input type="hidden" name="theme" value={nextMode} />
+// 			<div className="flex gap-2">
+// 				<button
+// 					type="submit"
+// 					className="flex h-8 w-8 cursor-pointer items-center justify-center"
+// 				>
+// 					{modeLabel[mode]}
+// 				</button>
+// 			</div>
+// 			<ErrorList errors={form.errors} id={form.errorId} />
+// 		</fetcher.Form>
+// 	)
+// }
 
 export function ErrorBoundary() {
 	// the nonce doesn't rely on the loader so we can access that

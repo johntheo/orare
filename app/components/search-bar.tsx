@@ -34,7 +34,7 @@ export function SearchBar({
 			className="flex flex-wrap items-center justify-center gap-2"
 			onChange={e => autoSubmit && handleFormChange(e.currentTarget)}
 		>
-			<div className="flex-1">
+			<div className="flex-1 md:max-w-2xl md:justify-center md:items-center">
 				<Label htmlFor={id} className="sr-only">
 					Search
 				</Label>
@@ -43,7 +43,7 @@ export function SearchBar({
 					name="search"
 					id={id}
 					defaultValue={searchParams.get('search') ?? ''}
-					placeholder="Search"
+					placeholder="Procurar"
 					className="w-full"
 					autoFocus={autoFocus}
 				/>
@@ -55,7 +55,7 @@ export function SearchBar({
 					className="flex w-full items-center justify-center"
 				>
 					<Icon name="magnifying-glass" size="md" />
-					<span className="sr-only">Search</span>
+					<span className="sr-only">Procurar</span>
 				</StatusButton>
 			</div>
 		</Form>
